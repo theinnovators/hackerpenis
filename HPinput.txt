@@ -1,0 +1,3181 @@
+namespace LoliTrainer
+{
+    partial class AboutBox1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBox1));
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.labelProductName = new System.Windows.Forms.Label();
+            this.labelVersion = new System.Windows.Forms.Label();
+            this.labelCopyright = new System.Windows.Forms.Label();
+            this.labelCompanyName = new System.Windows.Forms.Label();
+            this.textBoxDescription = new System.Windows.Forms.TextBox();
+            this.okButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.ColumnCount = 2;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67F));
+            this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
+    System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+
+            this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelProductName.Location = new System.Drawing.Point(143, 0);
+            this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelProductName.Name = "labelProductName";
+            this.labelProductName.Size = new System.Drawing.Size(271, 17);
+            this.labelProductName.TabIndex = 19;
+            this.labelProductName.Text = "Product Name";
+            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelVersion
+            // 
+            this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelVersion.Location = new System.Drawing.Point(143, 26);
+            this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(271, 17);
+            this.labelVersion.TabIndex = 0;
+            this.labelVersion.Text = "Version";
+            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // labelCompanyName
+            // 
+            this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelCompanyName.Location = new System.Drawing.Point(143, 78);
+            this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelCompanyName.Name = "labelCompanyName";
+            this.labelCompanyName.Size = new System.Drawing.Size(271, 17);
+            this.labelCompanyName.TabIndex = 22;
+            this.labelCompanyName.Text = "Company Name";
+            this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxDescription
+            // 
+            this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDescription.Location = new System.Drawing.Point(143, 107);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
+            this.textBoxDescription.Multiline = true;
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.ReadOnly = true;
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.PictureBox logoPictureBox;
+        private System.Windows.Forms.Label labelProductName;
+        private System.Windows.Forms.Label labelVersion;
+        private System.Windows.Forms.Label labelCopyright;
+        private System.Windows.Forms.Label labelCompanyName;
+        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.Button okButton;
+    }
+
+### ISO+IEC+1989-2002 15 Intrinsic Functions
+
+AT_SETUP([FUNCTION ABS])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -1.2345.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION ABS ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[+0001.2345
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ACOS])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -0.2345.
+       01  Z   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION ACOS ( X ) TO Z.
+           IF Z >= 1.80750052110824325 AND
+              Z <= 1.80750052110824345
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Z
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ANNUITY])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4) VALUE 3.
+       01  Y   PIC   S9(4) VALUE 5.
+       01  Z   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION ANNUITY ( X, Y ) TO Z.
+           IF Z >= 3.002932551319648080 AND
+              Z <= 3.002932551319648110
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Z
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ASIN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -0.2345.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION ASIN ( X ) TO Y.
+           IF Y >= -0.23670419431334685 AND
+              Y <= -0.23670419431334675
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ATAN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 1.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION ATAN ( X ) TO Y.
+           IF Y >= 0.78539816339744825 AND
+              Y <= 0.78539816339744835
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION CHAR])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 108.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION CHAR ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[k
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION COMBINED-DATETIME])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION COMBINED-DATETIME ( 987, 345 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[0000987.00345
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION CONCATENATE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(4).
+       PROCEDURE        DIVISION.
+           MOVE "defx" TO Y.
+           DISPLAY FUNCTION CONCATENATE ( Y "abc" "zz" "55" "666" )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[defxabczz55666
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION CONCATENATE with reference modding])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(4).
+       PROCEDURE        DIVISION.
+           MOVE "defx" TO Y.
+           DISPLAY FUNCTION CONCATENATE
+                   ( Y "abc" "zz" "55" "666" ) (2 : 9)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[efxabczz5
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION COS])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -0.2345.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION COS ( X ) TO Y.
+           IF Y >= 0.97263064125625815 AND
+              Y <= 0.97263064125625825
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION DATE-OF-INTEGER])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION DATE-OF-INTEGER ( 146000 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[20000925
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION DATE-TO-YYYYMMDD])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION DATE-TO-YYYYMMDD ( 981002, -10, 1994 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[18981002
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION DAY-OF-INTEGER])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION DAY-OF-INTEGER ( 146000 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[2000269
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION DAY-TO-YYYYDDD])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION DAY-TO-YYYYDDD ( 95005, -10, 2013 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[01995005
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION E])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION E
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[2.7182818284590452353602874713526625
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION EXCEPTION-FILE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       ENVIRONMENT      DIVISION.
+       INPUT-OUTPUT     SECTION.
+       FILE-CONTROL.
+           SELECT TEST-FILE ASSIGN "NOTEXIST"
+           FILE STATUS IS TEST-STATUS.
+       DATA             DIVISION.
+       FILE             SECTION.
+       FD  TEST-FILE.
+       01  TEST-REC      PIC X(4).
+       WORKING-STORAGE SECTION.
+       01  TEST-STATUS  PIC XX.
+       PROCEDURE        DIVISION.
+           OPEN INPUT TEST-FILE.
+           DISPLAY FUNCTION EXCEPTION-FILE
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[35TEST-FILE
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION EXCEPTION-LOCATION])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       ENVIRONMENT      DIVISION.
+       INPUT-OUTPUT     SECTION.
+       FILE-CONTROL.
+           SELECT TEST-FILE ASSIGN "NOTEXIST"
+           FILE STATUS IS TEST-STATUS.
+       DATA             DIVISION.
+       FILE             SECTION.
+       FD  TEST-FILE.
+       01  TEST-REC      PIC X(4).
+       WORKING-STORAGE SECTION.
+       01  TEST-STATUS  PIC XX.
+       PROCEDURE        DIVISION.
+       A00-MAIN SECTION.
+       A00.
+           OPEN INPUT TEST-FILE.
+       B00-MAIN SECTION.
+       B00.
+           DISPLAY FUNCTION EXCEPTION-LOCATION
+                   NO ADVANCING
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -debug -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[prog; A00 OF A00-MAIN; 18])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION EXCEPTION-STATEMENT])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       ENVIRONMENT      DIVISION.
+       INPUT-OUTPUT     SECTION.
+       FILE-CONTROL.
+           SELECT TEST-FILE ASSIGN "NOTEXIST"
+           FILE STATUS IS TEST-STATUS.
+       DATA             DIVISION.
+       FILE             SECTION.
+       FD  TEST-FILE.
+       01  TEST-REC      PIC X(4).
+       WORKING-STORAGE SECTION.
+       01  TEST-STATUS  PIC XX.
+       PROCEDURE        DIVISION.
+           OPEN INPUT TEST-FILE.
+           DISPLAY FUNCTION EXCEPTION-STATEMENT
+                   NO ADVANCING
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -debug -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OPEN                           ])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION EXCEPTION-STATUS])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       ENVIRONMENT      DIVISION.
+       INPUT-OUTPUT     SECTION.
+       FILE-CONTROL.
+           SELECT TEST-FILE ASSIGN "NOTEXIST"
+           FILE STATUS IS TEST-STATUS.
+       DATA             DIVISION.
+       FILE             SECTION.
+       FD  TEST-FILE.
+       01  TEST-REC      PIC X(4).
+       WORKING-STORAGE SECTION.
+       01  TEST-STATUS  PIC XX.
+       PROCEDURE        DIVISION.
+           OPEN INPUT TEST-FILE.
+           DISPLAY FUNCTION EXCEPTION-STATUS
+                   NO ADVANCING
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[EC-I-O-PERMANENT-ERROR         ])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION EXP])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   S99V9(16)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION EXP ( 3 ) TO Y.
+           IF Y >= 20.0855369231876636 AND
+              Y <= 20.0855369231876644
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION FACTORIAL])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION FACTORIAL ( 6 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[000000000000000720
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION FRACTION-PART])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION FRACTION-PART ( 3.12345 )
+           END-DISPLAY.
+           DISPLAY FUNCTION FRACTION-PART ( -3.12345 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[+.123450000000000000
+-.123450000000000000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION INTEGER])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -1.5.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION INTEGER ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-000000000000000002
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION INTEGER-OF-DATE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION INTEGER-OF-DATE ( 20000925 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[00146000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION INTEGER-OF-DAY])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION INTEGER-OF-DAY ( 2000269 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[00146000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION INTEGER-PART])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -1.5.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION INTEGER-PART ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-000000000000000001
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LENGTH])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE -1.5.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION LENGTH ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[8
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOCALE-DATE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(32)   VALUE SPACES.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION LOCALE-DATE ( "19630302" ) TO X.
+           IF X NOT = SPACES
+                DISPLAY "OK"
+                END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOCALE-TIME])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(32)   VALUE SPACES.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION LOCALE-TIME ( "233012" ) TO X.
+           IF X NOT = SPACES
+                DISPLAY "OK"
+                END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOCALE-TIME-FROM-SECONDS])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(32)   VALUE SPACES.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION LOCALE-TIME-FROM-SECONDS ( 33012 ) TO X.
+           IF X NOT = SPACES
+                DISPLAY "OK"
+                END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOG])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 1.5.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION LOG ( X ) TO Y.
+           IF Y >= 0.40546510810816435 AND
+              Y <= 0.40546510810816445
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOG10])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 1.5.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION LOG10 ( X ) TO Y.
+           IF Y >= 0.17609125905568120 AND
+              Y <= 0.17609125905568128
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOWER-CASE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(10) VALUE "A#B.C%D+E$".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION LOWER-CASE ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[a#b.c%d+e$
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION LOWER-CASE with reference modding])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(10) VALUE "A#B.C%D+E$".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION LOWER-CASE ( X ) (1 : 3)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[a#b
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION MAX])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION MAX ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[8
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION MEAN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION MEAN ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-1.20000000000000000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION MEDIAN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION MEDIAN ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[0
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION MIDRANGE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION MIDRANGE ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-3.000000000000000000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION MIN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION MIN ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-14
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION MOD])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION MOD ( -11 5 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[+000000000000000004
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION NUMVAL])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(12) VALUE " -9876.1234 ".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION NUMVAL ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-00000000009876.1234
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION NUMVAL-C])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(14) VALUE " % -9876.1234 ".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION NUMVAL-C ( X , "%" )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-00000000009876.1234
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ORD])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION ORD ( "k" )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[00000108
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ORD-MAX])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION ORD-MAX ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[00000004
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION ORD-MIN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION ORD-MIN ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[00000002
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION PI])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION PI
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[3.1415926535897932384626433832795029
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION PRESENT-VALUE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION PRESENT-VALUE ( 3 2 1 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[0.562500000000000000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION RANGE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION RANGE ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[+000000000000000022
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION REM])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION REM ( -11 5 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[-000000000000000001
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION REVERSE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(10) VALUE "A#B.C%D+E$".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION REVERSE ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[$E+D%C.B#A
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION REVERSE with reference modding])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(10) VALUE "A#B.C%D+E$".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION REVERSE ( X ) (1 : 4)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[$E+D
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SECONDS-FROM-FORMATTED-TIME])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC      X(6)   VALUE "hhmmss".
+       01  Y   PIC      9(8)   COMP-5.
+       01  Z   PIC      X(6)   VALUE "010203".
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION SECONDS-FROM-FORMATTED-TIME (X, Z) TO Y.
+           IF Y = 3723
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SECONDS-PAST-MIDNIGHT])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC      9(8)   COMP-5.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION SECONDS-PAST-MIDNIGHT TO Y.
+           IF Y < 86402
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SIGN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION SIGN ( 3.12345 )
+           END-DISPLAY.
+           DISPLAY FUNCTION SIGN ( -0.0 )
+           END-DISPLAY.
+           DISPLAY FUNCTION SIGN ( 0.0 )
+           END-DISPLAY.
+           DISPLAY FUNCTION SIGN ( -3.12345 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[+00000001
++00000000
++00000000
+-00000001
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SIN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 1.5.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION SIN ( X ) TO Y.
+           IF Y >= 0.99749498660405440 AND
+              Y <= 0.99749498660405450
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SQRT])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 1.5.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION SQRT ( X ) TO Y.
+           IF Y >= 1.22474487139158890 AND
+              Y <= 1.22474487139158899
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION STANDARD-DEVIATION])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   S9V9(17)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION STANDARD-DEVIATION ( 3 -14 0 8 -3 ) TO Y.
+           IF Y >= 7.35934779718963925 AND
+              Y <= 7.35934779718964025
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION STORED-CHAR-LENGTH])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(24).
+       PROCEDURE        DIVISION.
+           MOVE "123456789012" TO Y.
+           DISPLAY FUNCTION STORED-CHAR-LENGTH ( Y )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[00000012
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SUBSTITUTE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(20).
+       PROCEDURE        DIVISION.
+           MOVE "abc111444555defxxabc" TO Y.
+           DISPLAY FUNCTION SUBSTITUTE ( Y "abc" "zz" "55" "666" )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[zz1114446665defxxzz
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SUBSTITUTE with reference modding])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(20).
+       PROCEDURE        DIVISION.
+           MOVE "abc111444555defxxabc" TO Y.
+           DISPLAY FUNCTION SUBSTITUTE
+                   ( Y "abc" "zz" "55" "666" ) (2 : 9)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[z11144466
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SUBSTITUTE-CASE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(20).
+       PROCEDURE        DIVISION.
+           MOVE "ABC111444555defxxabc" TO Y.
+           DISPLAY FUNCTION SUBSTITUTE-CASE (Y "abc" "zz" "55" "666")
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[zz1114446665defxxzz
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION SUBSTITUTE-CASE with reference mod])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  Y   PIC   X(20).
+       PROCEDURE        DIVISION.
+           MOVE "abc111444555defxxabc" TO Y.
+           DISPLAY FUNCTION SUBSTITUTE-CASE
+                   ( Y "ABC" "zz" "55" "666" ) (2 : 9)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[z11144466
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION TAN])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   S9(4)V9(4) VALUE 1.5.
+       01  Y   PIC   S99V9(16)   COMP.
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION TAN ( X ) TO Y.
+           IF Y >= 14.1014199471717185 AND
+              Y <= 14.1014199471717205
+                   DISPLAY "OK"
+                   END-DISPLAY
+           ELSE
+                   DISPLAY Y
+                   END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION TRIM])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(12) VALUE " a#b.c%d+e$ ".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION TRIM ( X )
+           END-DISPLAY.
+           DISPLAY FUNCTION TRIM ( X TRAILING )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[a#b.c%d+e$
+ a#b.c%d+e$
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION TRIM with reference modding])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(12) VALUE " a#b.c%d+e$ ".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION TRIM ( X ) (2 : 3)
+           END-DISPLAY.
+           DISPLAY FUNCTION TRIM ( X TRAILING ) (2 : 3)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[#b.
+a#b
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION UPPER-CASE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(10) VALUE "a#b.c%d+e$".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION UPPER-CASE ( X )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[A#B.C%D+E$
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION UPPER-CASE with reference modding])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  X   PIC   X(10) VALUE "a#b.c%d+e$".
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION UPPER-CASE ( X ) (1 : 3)
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[A#B
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION VARIANCE])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       PROCEDURE        DIVISION.
+           DISPLAY FUNCTION VARIANCE ( 3 -14 0 8 -3 )
+           END-DISPLAY.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[+54.1600000000000000
+])
+
+AT_CLEANUP
+
+AT_SETUP([FUNCTION WHEN-COMPILED])
+
+AT_DATA([prog.cob], [
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      prog.
+       DATA             DIVISION.
+       WORKING-STORAGE  SECTION.
+       01  XYZ.
+           03 X         PIC X.
+           03 FILLER    PIC X(20).
+       PROCEDURE        DIVISION.
+           MOVE FUNCTION WHEN-COMPILED TO XYZ.
+           IF X = "2"
+              DISPLAY "OK"
+              END-DISPLAY
+           ELSE
+              DISPLAY "NOT OK"
+              END-DISPLAY
+           END-IF.
+           STOP RUN.
+])
+
+AT_CHECK([${COMPILE} -o prog prog.cob])
+AT_CHECK([./prog], [0],
+[OK
+])
+
+AT_CLEANUP
+
+screen say(who, what, side_image=None, two_window=False):
+    zorder 10
+    # add Transform(Text("PyTFaLL", style="earthkid", color=black, size=50), alpha=.6) align (0.6, 0.9)
+    # add Transform(Text("PyTFaLL", style="earthkid", color=azure, size=70), alpha=.5) align (0.1, 0.95)
+    # add Transform(Text("PyTFaLL", style="earthkid", color=black, size=50), alpha=.6) align (0.8, 0.98)
+    # add Transform(Text("PyTFaLL", style="earthkid", color=black, size=50), alpha=.6) align (0.9, 0.9
+    if block_say:
+        button:
+            background Null()
+            xysize (config.screen_width, config.screen_height)
+            action Return()
+
+    # Decide if we want to use the one-window or two-window variant.
+    if not two_window:
+
+        # The one window variant.
+        window:
+            id "window"
+
+            has vbox:
+                style "say_vbox"
+
+            if who:
+                text who id "who"
+
+            text what id "what"
+
+    else:
+
+        # The two window variant.
+        vbox:
+            style "say_two_window_vbox"
+
+            if who:
+                window:
+                    style "say_who_window"
+
+                    text who:
+                        id "who"
+
+            window:
+                id "window"
+
+                has vbox:
+                    style "say_vbox"
+
+                text what id "what"
+
+    # If there's a side image, display it above the text.
+    if side_image:
+        # In order to have more control over the say screen portraits for Chars we pass instances of Char here:
+        if isinstance(side_image, Char):
+            if side_image.say_screen_portrait_overlay_mode == "zoom_fast":
+                add At(side_image.say_screen_portrait, interactions_zoom(.2)) pos 219, 639 anchor .5, .5
+            elif side_image.say_screen_portrait_overlay_mode == "zoom_slow":
+                add At(side_image.say_screen_portrait, interactions_zoom(1.2)) pos 219, 639 anchor .5, .5
+            elif side_image.say_screen_portrait_overlay_mode == "test_case":
+                add side_image.say_screen_portrait pos 219, 639 anchor .5, .5
+                # add interactions_surprised_tr pos 150, 650 yanchor 1.0
+            else:
+                add side_image.say_screen_portrait pos 219, 639 anchor .5, .5
+
+
+            if side_image.say_screen_portrait_overlay_mode not in [None] + side_image.UNIQUE_SAY_SCREEN_PORTRAIT_OVERLAYS:
+                timer .0001 action Function(interactions_portraits_overlay.change, side_image.say_screen_portrait_overlay_mode)
+                add interactions_portraits_overlay
+        else:
+            add side_image xalign 0.138 yalign 0.968
+            add interactions_portraits_overlay
+    else:
+        add SideImage() xalign 0.0 yalign 1.0
+
+    # Use the quick menu.
+    use quick_menu
+
+##############################################################################
+# Choice
+#
+# Screen that's used to display in-game menus.
+# http://www.renpy.org/doc/html/screen_special.html#choice
+
+screen choice(items):
+
+    zorder 15
+    modal True
+
+    window:
+        style "menu_window"
+        align (0.5, 0.5)
+
+        vbox:
+            style "menu"
+            spacing 2
+
+            $ item = items[0][0]
+            if item in menu_extensions:
+                for cap, act in menu_extensions.build_choices(item):
+                    if act:
+                        button:
+                            if isinstance(act, (list, tuple)) and "return" in act:
+                                action MenuExtensionAction(act, [items[0][1]])
+                            else:
+                                action act
+                            style "menu_choice_button_blue"
+
+                            text cap style "menu_choice"
+
+                    else:
+                        text cap style "menu_caption"
+
+            for caption, action, chosen in items:
+                if caption in menu_extensions:
+                    $ pass
+                else:
+                    if action:
+                        button:
+                            action action
+                            style "menu_choice_button"
+
+                            text caption style "menu_choice"
+
+                    else:
+                        text caption style "menu_caption"
+
+
+init -2:
+    $ config.narrator_menu = True
+
+##############################################################################
+# Input
+#
+# Screen that's used to display renpy.input()
+# http://www.renpy.org/doc/html/screen_special.html#input
+screen input(prompt=""):
+    window style "input_window":
+        has vbox
+
+        text prompt style "input_prompt"
+        input id "input" style "input_text"
+
+    use quick_menu
+
+##############################################################################
+# Nvl
+#
+# Screen used for nvl-mode dialogue and menus.
+# http://www.renpy.org/doc/html/screen_special.html#nvl
+
+screen nvl(dialogue, items=None):
+
+    window:
+        style "nvl_window"
+
+        has vbox:
+            style "nvl_vbox"
+
+        # Display dialogue.
+        for who, what, who_id, what_id, window_id in dialogue:
+            window:
+                id window_id
+
+                has hbox:
+                    spacing 10
+
+                if who is not None:
+                    text who id who_id
+
+                text what id what_id
+
+        # Display a menu, if given.
+        if items:
+
+            vbox:
+                id "menu"
+
+                for caption, action, chosen in items:
+
+                    if action:
+
+                        button:
+                            style "nvl_menu_choice_button"
+                            action action
+
+                            text caption style "nvl_menu_choice"
+
+                    else:
+
+                        text caption style "nvl_dialogue"
+
+    add SideImage() xalign 0.0 yalign 1.0
+
+    use quick_menu
+
+##############################################################################
+# Main Menu
+#
+# Screen that's used to display the main menu, when Ren'Py first starts
+# http://www.renpy.org/doc/html/screen_special.html#main-menu
+
+transform patreon_hover(init_alpha=.25):
+    alpha init_alpha additive .4
+    on hover:
+        linear 1.0 alpha 1.0
+    on idle:
+        linear 1.0 alpha .25
+
+screen main_menu():
+    tag menu
+
+    default prereqs = exist(["content/chars/", "content/rchars/"])
+
+    default map_options = ["content/gfx/bg/locations/map_buttons/dark/", "content/gfx/bg/locations/map_buttons/bright/", "content/gfx/bg/locations/map_buttons/gismo/"]
+
+    # The background of the main menu.
+    add "bg_main"
+
+    if not renpy.get_screen("credits"):
+        vbox:
+            align (.5, .01)
+            text "Support us on:":
+                at patreon_hover(init_alpha=.4)
+                xalign .5
+                size 22
+                color goldenrod
+                drop_shadow [(1, 2)]
+                drop_shadow_color black
+                antialias True
+            hbox:
+                spacing 60
+                button:
+                    at patreon_hover
+                    xalign .5
+                    xysize (100, 100)
+                    background ProportionalScale("content/gfx/interface/icons/credits/x_hole_idle.png", 100, 100)
+                    hover_background ProportionalScale("content/gfx/interface/icons/credits/x_hole_hover.png", 100, 100)
+                    action OpenURL('https://www.patreon.com/xelapy')
+                    add At(ProportionalScale("content/gfx/interface/icons/credits/patreonlogoorange.png", 100, 25, yalign=1.0), patreon_bounce)
+                # null width 10
+                button:
+                    at patreon_hover
+                    xalign .5
+                    xysize (100, 100)
+                    background ProportionalScale("content/gfx/interface/icons/credits/dark_hole_idle.png", 100, 100)
+                    hover_background ProportionalScale("content/gfx/interface/icons/credits/dark_hole_hover.png", 100, 100)
+                    action OpenURL('https://www.patreon.com/darkt')
+                    add At(ProportionalScale("content/gfx/interface/icons/credits/patreonlogoorange.png", 100, 25, yalign=1.0), patreon_bounce)
+
+    # button:
+        # background "content/gfx/interface/logos/gibc.png"
+        # hover_background im.MatrixColor("content/gfx/interface/logos/gibc.png", im.matrix.brightness(0.10))
+        # action OpenURL('https://mega.nz/#!mxAw0Q5b!F-4-An4oK5TbB9BO5e-M0Elslolrim6t3UxBdGolj-8')
+        # focus_mask True
+        # xysize(350, 342)
+    # $ index = map_options.index(persistent.town_path)
+    # button:
+        # xalign 0
+        # yalign 1.0
+        # xysize (60, 25)
+        # style "blue1"
+        # text "<->" color black align (0.5, 0.5) size 15
+        # action [SetField(persistent, "town_path", map_options[(index + 1) % len(map_options)]), Jump("_save_reload_game")]
+
+    # $ img = ProportionalScale("content/gfx/interface/icons/arena.png", 60, 60)
+    #imagebutton:
+        #pos (380, 460)
+        #idle (img)
+        #hover (im.MatrixColor(img, im.matrix.brightness(0.25)))
+        #action Show("credits", transition=ImageDissolve("content/gfx/masks/m02.webp", 3))
+    if not prereqs:
+        frame:
+            background Frame("content/gfx/frame/FrameGP.png", 40, 40)
+            xanchor 0
+            xpos 0.50
+            xmaximum 300
+            yalign 0.5
+            text ("Resources are missing, the game won't run without. See the instructions on the "+
+                "{a=http://www.pinkpetal.org/index.php?topic=3401.0}{size=15}forum{/size}{/a}. "+
+                "At least one unique character with accompanied .json is required "+
+                "in the\n{i}game/content/chars/{/i} subdirectory of PyTFall as well as "+
+                "one random character .json in the\n"+
+                "{i}game/content/{b}r{/b}chars/{/i} directory.") size 15
+    # ===== Animation ===== #
+
+    viewport:
+        xysize (768, 328)
+        pos (514, 100)
+        add "mm_clouds" at mm_clouds(768, 0, 50)
+        add "mm_clouds" at  mm_clouds(0, -768, 50)
+
+    add "eyes" pos (150, 410)
+    # add "logo" pos (980, 250)
+    add "anim_logo" pos (980, 250) # static logo
+    add "fog" at fog
+
+    # Fire
+    viewport:
+        xysize (200, 526)
+        pos (580, 100)
+        # add Transform(Solid(red, xysize=(20, 263)), alpha=1) at mm_fire(366, 0, 30)
+        # add Transform(Solid(black, xysize=(20, 263)), alpha=1) at mm_fire(1009, 0, 30)
+        add "mm_fire" at mm_fire(263, 0, 1.0, 0, 8)
+        add "mm_fire" at mm_fire(526, 263, 0, 1, 8)
+        add "mm_fire" at mm_fire(426, 163, 0.5, 0, 8)
+
+    # The main menu buttons.
+    vbox:
+        align (0.947, 0.87)
+        frame:
+            background Null()
+            style_group "mmenu"
+            vbox:
+                spacing 4
+                textbutton _("New Game") action SensitiveIf(prereqs), Start() xalign 0.5
+                null height 4
+                textbutton _("Load Game") action SensitiveIf(prereqs), Show("s_menu", s_menu="Load"), With(dissolve)
+
+                textbutton _("Settings") action Show("s_menu", s_menu="Settings"), With(dissolve)
+                hbox:
+                    xalign 0.5
+                    textbutton _("Credits") action Show("credits", transition=ImageDissolve("content/gfx/masks/m02.webp", 1)) xsize 85 text_size 16
+                    textbutton _("Help") action Show("discord", transition=ImageDissolve("content/gfx/masks/m02.webp", 1)) xsize 85 text_size 16
+                textbutton _("Quit") action Quit(confirm=False) xalign 0.5
+
+
+screen discord():
+    zorder 1
+    modal True
+    frame:
+        background Transform(Frame("content/gfx/frame/frame_dec_1.png", 20, 20), alpha=.7)
+        pos(10, 120)
+        xysize (900, 580)
+        style_group "mmenu"
+        textbutton "Hide":
+            align(0.5, 0.90)
+            action Hide("discord", transition=dissolve)
+        vbox:
+            xalign .5
+            yalign .2
+            text "The game is still in development. Support us if you enjoyed it!" align (.45, .1) size 25 color goldenrod drop_shadow [(1, 2)] drop_shadow_color black antialias True style_prefix "proper_stats"
+            null height 10
+            text "ANY QUESTIONS OR BUGS TO REPORT?" size 35 color goldenrod drop_shadow [(1, 2)] drop_shadow_color black antialias True style_prefix "proper_stats" xalign .5
+            text "JOIN OUR COMMUNITY ON:" size 35 color goldenrod drop_shadow [(1, 2)] drop_shadow_color black antialias True style_prefix "proper_stats" xalign .5
+        null height 5
+        button:
+            yalign .6
+            xalign .5
+            xysize 300, 83
+            background Transform("content/gfx/interface/icons/credits/discord.png", zoom=.9, align=(.5, .5))
+            hover_background Transform("content/gfx/interface/icons/credits/discord.png", align=(.5, .5))
+            action OpenURL("https://discord.gg/4tT4qmW")
+
+
+screen credits():
+    zorder 1 modal True
+
+    frame:
+        background Transform(Frame("content/gfx/frame/frame_dec_1.png", 20, 20), alpha=.9)
+        pos (10, 10)
+        xysize (900, 700)
+        style_group "mmenu"
+
+        text "About Us":
+            xalign .5 ypos 50
+            size 35
+            color goldenrod
+            drop_shadow [(1, 2)]
+            drop_shadow_color black
+            antialias True
+            style_prefix "proper_stats"
+
+        side "c r":
+            area (100, 100, 800, 550)
+            viewport id "vp":
+                draggable True
+                mousewheel True
+                vbox:
+                    hbox:
+                        xalign .52
+                        vbox:
+                            style_prefix "proper_stats"
+                            text "Core Coding" xalign .5 size 22 color goldenrod drop_shadow [(1, 2)] drop_shadow_color black antialias True
+                            button:
+                                xalign .5
+                                xysize (100, 100)
+                                background ProportionalScale("content/gfx/interface/icons/credits/x_hole_idle.png", 100, 100)
+                                hover_background ProportionalScale("content/gfx/interface/icons/credits/x_hole_hover.png", 100, 100)
+                                action OpenURL('https://www.patreon.com/xelapy')
+                                add At(ProportionalScale("content/gfx/interface/icons/credits/patreonlogoorange.png", 100, 25, yalign=1.0), patreon_bounce)
+                            null height 3
+                            text " XelaPy " xalign .5 size 30 color goldenrod drop_shadow [(1, 2)] drop_shadow_color black antialias True
+                            hbox:
+                                spacing 10
+                                xalign .5
+                                button:
+                                    xysize 30, 30
+                                    background Frame("content/gfx/interface/icons/credits/twitter.png")
+                                    hover_background Frame(im.MatrixColor("content/gfx/interface/icons/credits/twitter.png", im.matrix.brightness(.05)))
+                                    action OpenURL('https://twitter.com/XelaPy')
+                                button:
+                                    xysize 30, 30
+                                    background Frame("content/gfx/interface/icons/credits/youtube.png")
+                                    hover_background Frame(im.MatrixColor("content/gfx/interface/icons/credits/youtube.png", im.matrix.brightness(.05)))
+                                    action OpenURL('https://www.youtube.com/channel/UCWnMQ6MO-KpMytYf4hoFFBA')
+                        null width 100
+                        vbox:
+                            style_prefix "proper_stats"
+                            text "Content and Coding":
+                                size 22
+                                xalign .5
+                                color goldenrod
+                                drop_shadow [(1, 2)]
+                                drop_shadow_color black
+                                antialias True
+                            button:
+                                xalign .5
+                                xysize (100, 100)
+                                background ProportionalScale("content/gfx/interface/icons/credits/dark_hole_idle.png", 100, 100)
+                                hover_background ProportionalScale("content/gfx/interface/icons/credits/dark_hole_hover.png", 100, 100)
+                                action OpenURL('https://www.patreon.com/darkt')
+                                add At(ProportionalScale("content/gfx/interface/icons/credits/patreonlogoorange.png", 100, 25, yalign=1.0), patreon_bounce)
+                            null height 3
+                            text " DarkTl ":
+                                align .5, 1.0
+                                size 30
+                                color goldenrod
+                                drop_shadow [(1, 2)]
+                                drop_shadow_color black
+                                antialias True
+                            null height 30
+
+                    null height 10
+
+                    text "The game is still in development. Support us if you enjoyed it!":
+                        size 25
+                        color goldenrod
+                        drop_shadow [(1, 2)]
+                        drop_shadow_color black
+                        antialias True
+                        style_prefix "proper_stats"
+
+                    null height 10
+
+                    vbox:
+                        style_prefix "proper_stats"
+                        text "Special thanks to:":
+                            size 22
+                            color goldenrod
+                            drop_shadow [(1, 2)]
+                            drop_shadow_color black
+                            antialias True
+                        text "All artists and composers for amazing content featured in PyTFall."
+                        text "Tom Rothamel for Ren'Py."
+
+                        null height 10
+                        text "Many thanks to:":
+                            size 22
+                            color goldenrod
+                            drop_shadow [(1, 2)]
+                            drop_shadow_color black
+                            antialias True
+                        text "TheWorst, Gismo, Picobyte, CherryWood, Xipomus, Lamoli, Thewlis, Rudistoned,"
+                        text "Eliont, Matt, Longint, Armegetton, MrKlaus, Krakr, Sysreq, GonDra, Jaeke, Janmaba."
+
+        textbutton "Hide":
+            align .5, .90
+            action Hide("credits", transition=dissolve)
+
+
+##############################################################################
+# Navigation
+#
+# Screen that's included in other screens to display the game menu
+# navigation and background.
+# http://www.renpy.org/doc/html/screen_special.html#navigation
+screen navigation():
+
+    # The background of the game menu.
+    # window:
+        # style "gm_root"
+
+    # The various buttons.
+    frame:
+        style_group "gm_nav"
+        xalign .98
+        yalign .98
+
+        has vbox
+
+        textbutton _("Return") action Return()
+        textbutton _("Settings") action Show("s_menu", s_menu="Settings"), With(dissolve) # action ShowMenu("preferences")
+        textbutton _("Save Game") action Show("s_menu", s_menu="Save"), With(dissolve) # action ShowMenu("save")
+        textbutton _("Load Game") action Show("s_menu", s_menu="Load"), With(dissolve) # action ShowMenu("load")
+        textbutton _("Main Menu") action MainMenu()
+        # textbutton _("Help") action Help()
+        textbutton _("Quit") action Quit()
+
+    key "mousedown_3" action Return()
+
+##############################################################################
+# Yes/No Prompt
+#
+# Screen that asks the user a yes or no question.
+# http://www.renpy.org/doc/html/screen_special.html#yesno-prompt
+
+screen yesno_prompt(message, yes_action, no_action):
+    zorder 10000000
+    modal True
+
+    # window:
+        # style "gm_root"
+
+    add Transform("content/gfx/images/bg_gradient2.png", alpha=.3)
+    frame:
+        background Frame (Transform("content/gfx/frame/ink_box.png", alpha=.65), 10, 10)
+        style_prefix "dropdown_gm2"
+        minimum 550, 200
+        margin 10, 10
+        padding 10, 10
+        align .5, .1
+        has vbox:
+            align .5, .5
+            spacing 30
+
+        label _(message) xalign 0.5 text_text_align 0.5 text_color "#ecc88a" text_font "fonts/TisaOTM.otf" text_size 17 text_outlines [(1, "#3a3a3a", 0, 0)]
+
+        hbox:
+            xalign .5
+            spacing 100
+
+            textbutton _("Yes") action yes_action
+            textbutton _("No") action no_action
+
+    # Right-click and escape answer "no".
+    key "game_menu" action no_action
+    key "K_RETURN" action yes_action
+    key "K_ESCAPE" action no_action
+
+
+##############################################################################
+# Quick Menu
+#
+# A screen that's included by the default say screen, and adds quick access to
+# several useful functions.
+screen quick_menu():
+
+    # Add an in-game quick menu.
+    hbox:
+        style_group "quick"
+
+        #xalign 1.0
+        #yalign 1.0
+        pos (937,773)
+
+        # textbutton _("Back") action Rollback()
+        # textbutton _("Save") action ShowMenu('save')
+        textbutton _("Q.Save") action QuickSave()
+        textbutton _("Q.Load") action QuickLoad()
+        textbutton _("Skip") action Skip()
+        textbutton _("F.Skip") action Skip(fast=True, confirm=True)
+        textbutton _("Auto") action Preference("auto-forward", "toggle")
+        # textbutton _("Prefs") action ShowMenu('preferences')
+
+init: # Default preference menus, replaces by our own versions:
+    ##############################################################################
+    # Save, Load
+    #
+    # Screens that allow the user to save and load the game.
+    # http://www.renpy.org/doc/html/screen_special.html#save
+    # http://www.renpy.org/doc/html/screen_special.html#load
+
+    # Since saving and loading are so similar, we combine them into
+    # a single screen, file_picker. We then use the file_picker screen
+    # from simple load and save screens.
+
+    screen file_picker():
+
+        frame:
+            style "file_picker_frame"
+
+            has vbox
+
+            # The buttons at the top allow the user to pick a
+            # page of files.
+            hbox:
+                style_group "file_picker_nav"
+
+                textbutton _("Previous"):
+                    action FilePagePrevious()
+
+                textbutton _("Auto"):
+                    action FilePage("auto")
+
+                textbutton _("Quick"):
+                    action FilePage("quick")
+
+                for i in range(1, 9):
+                    textbutton str(i):
+                        action FilePage(i)
+
+                textbutton _("Next"):
+                    action FilePageNext()
+
+            $ columns = 2
+            $ rows = 4
+
+            # Display a grid of file slots.
+            grid columns rows:
+                transpose True
+                xfill True
+                style_group "file_picker"
+
+                # Display ten file slots, numbered 1 - 10.
+                for i in range(1, columns * rows + 1):
+
+                    $ file_name = FileSlotName(i, columns * rows)
+                    $ file_time = FileTime(i, empty=_("Empty Slot."))
+                    $ json_info = FileJson(i, empty= _(""))
+                    $ save_name = FileSaveName(i)
+
+                    # Each file slot is a button.
+                    button:
+                        action  FileAction(i)
+                        xfill True
+
+                        has hbox
+
+                        # Add the screenshot.
+                        add FileScreenshot(i)
+
+                        vbox:
+                            spacing 1
+                            text "[file_name]. [file_time!t]\n[save_name!t]" xpos 70
+                            hbox:
+                                xpos 20
+                                spacing 4
+                                for key in json_info:
+                                    if not key.startswith("_"):
+                                        $ val = json_info[key]
+                                        text "[key]: [val]"
+
+                        key "save_delete" action FileDelete(i)
+
+
+    screen save():
+
+        # This ensures that any other menu screen is replaced.
+        tag menu
+
+        use navigation
+        use file_picker
+
+    screen load():
+
+        # This ensures that any other menu screen is replaced.
+        tag menu
+
+        use navigation
+        use file_picker
+
+    ##############################################################################
+    # Preferences
+    #
+    # Screen that allows the user to change the preferences.
+    # http://www.renpy.org/doc/html/screen_special.html#prefereces
+
+    screen preferences():
+
+        tag menu
+
+        # Include the navigation.
+        use navigation
+
+        # Put the navigation columns in a three-wide grid.
+        grid 3 1:
+            style_group "prefs"
+            xfill True
+
+            # The left column.
+            vbox:
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Display")
+                    textbutton _("Window") action Preference("display", "window")
+                    textbutton _("Fullscreen") action Preference("display", "fullscreen")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Transitions")
+                    textbutton _("All") action Preference("transitions", "all")
+                    textbutton _("None") action Preference("transitions", "none")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Text Speed")
+                    bar value Preference("text speed")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    textbutton _("Joystick...") action Preference("joystick")
+
+            vbox:
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Skip")
+                    textbutton _("Seen Messages") action Preference("skip", "seen")
+                    textbutton _("All Messages") action Preference("skip", "all")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    textbutton _("Begin Skipping") action Skip()
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("After Choices")
+                    textbutton _("Stop Skipping") action Preference("after choices", "stop")
+                    textbutton _("Keep Skipping") action Preference("after choices", "skip")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Auto-Forward Time")
+                    bar value Preference("auto-forward time")
+
+                    if config.has_voice:
+                        textbutton _("Wait for Voice") action Preference("wait for voice", "toggle")
+
+            vbox:
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Mute")
+
+                    textbutton "Music":
+                        action Preference("music mute", "toggle")
+                    textbutton "Sound":
+                        action Preference("sound mute", "toggle")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Music Volume")
+                    bar value Preference("music volume")
+
+                frame:
+                    style_group "pref"
+                    has vbox
+
+                    label _("Sound Volume")
+                    bar value Preference("sound volume")
+
+                    if config.sample_sound:
+                        textbutton _("Test"):
+                            action Play("sound", config.sample_sound)
+                            style "soundtest_button"
+
+                if config.has_voice:
+                    frame:
+                        style_group "pref"
+                        has vbox
+
+                        label _("Voice Volume")
+                        bar value Preference("voice volume")
+
+                        textbutton _("Voice Sustain") action Preference("voice sustain", "toggle")
+                        if config.sample_voice:
+                            textbutton _("Test"):
+                                action Play("voice", config.sample_voice)
+                                style "soundtest_button"
+
+struct id_table {
+	__u16 match_flags;
+	__u16 lmp_subver;
+	__u16 hci_rev;
+	bool config_needed;
+	char *fw_name;
+	char *cfg_name;
+};
+
+static const struct id_table ic_id_table[] = {
+	/* 8723B */
+	{ IC_INFO(RTL_ROM_LMP_8723B, 0xb),
+	  .config_needed = false,
+	  .fw_name  = "rtl_bt/rtl8723b_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8723b_config.bin" },
+
+	/* 8723D */
+	{ IC_INFO(RTL_ROM_LMP_8723B, 0xd),
+	  .config_needed = true,
+	  .fw_name  = "rtl_bt/rtl8723d_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8723d_config.bin" },
+
+	/* 8821A */
+	{ IC_INFO(RTL_ROM_LMP_8821A, 0xa),
+	  .config_needed = false,
+	  .fw_name  = "rtl_bt/rtl8821a_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8821a_config.bin" },
+
+	/* 8821C */
+	{ IC_INFO(RTL_ROM_LMP_8821A, 0xc),
+	  .config_needed = false,
+	  .fw_name  = "rtl_bt/rtl8821c_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8821c_config.bin" },
+
+	/* 8761A */
+	{ IC_MATCH_FL_LMPSUBV, RTL_ROM_LMP_8761A, 0x0,
+	  .config_needed = false,
+	  .fw_name  = "rtl_bt/rtl8761a_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8761a_config.bin" },
+
+	/* 8822B */
+	{ IC_INFO(RTL_ROM_LMP_8822B, 0xb),
+	  .config_needed = true,
+	  .fw_name  = "rtl_bt/rtl8822b_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8822b_config.bin" },
+	};
+
+static int rtl_read_rom_version(struct hci_dev *hdev, u8 *version)
+{
+	struct rtl_rom_version_evt *rom_version;
+	struct sk_buff *skb;
+
+	/* Read RTL ROM version command */
+	skb = __hci_cmd_sync(hdev, 0xfc6d, 0, NULL, HCI_INIT_TIMEOUT);
+	if (IS_ERR(skb)) {
+		BT_ERR("%s: Read ROM version failed (%ld)",
+		       hdev->name, PTR_ERR(skb));
+		return PTR_ERR(skb);
+	}
+
+	if (skb->len != sizeof(*rom_version)) {
+		BT_ERR("%s: RTL version event length mismatch", hdev->name);
+		kfree_skb(skb);
+		return -EIO;
+	}
+
+	rom_version = (struct rtl_rom_version_evt *)skb->data;
+	bt_dev_info(hdev, "rom_version status=%x version=%x",
+		    rom_version->status, rom_version->version);
+
+	*version = rom_version->version;
+
+	kfree_skb(skb);
+	return 0;
+}
+
+static int rtlbt_parse_firmware(struct hci_dev *hdev, u16 lmp_subver,
+				const struct firmware *fw,
+				unsigned char **_buf)
+{
+	const u8 extension_sig[] = { 0x51, 0x04, 0xfd, 0x77 };
+	struct rtl_epatch_header *epatch_info;
+	unsigned char *buf;
+	int i, ret, len;
+	size_t min_size;
+	u8 opcode, length, data, rom_version = 0;
+	int project_id = -1;
+	const unsigned char *fwptr, *chip_id_base;
+	const unsigned char *patch_length_base, *patch_offset_base;
+	u32 patch_offset = 0;
+	u16 patch_length, num_patches;
+	static const struct {
+		__u16 lmp_subver;
+		__u8 id;
+	} project_id_to_lmp_subver[] = {
+		{ RTL_ROM_LMP_8723A, 0 },
+		{ RTL_ROM_LMP_8723B, 1 },
+		{ RTL_ROM_LMP_8821A, 2 },
+		{ RTL_ROM_LMP_8761A, 3 },
+		{ RTL_ROM_LMP_8822B, 8 },
+		{ RTL_ROM_LMP_8723B, 9 },	/* 8723D */
+		{ RTL_ROM_LMP_8821A, 10 },	/* 8821C */
+	};
+
+	ret = rtl_read_rom_version(hdev, &rom_version);
+	if (ret)
+		return ret;
+
+	min_size = sizeof(struct rtl_epatch_header) + sizeof(extension_sig) + 3;
+	if (fw->size < min_size)
+		return -EINVAL;
+
+	fwptr = fw->data + fw->size - sizeof(extension_sig);
+	if (memcmp(fwptr, extension_sig, sizeof(extension_sig)) != 0) {
+		BT_ERR("%s: extension section signature mismatch", hdev->name);
+		return -EINVAL;
+	}
+
+	/* Loop from the end of the firmware parsing instructions, until
+	 * we find an instruction that identifies the "project ID" for the
+	 * hardware supported by this firwmare file.
+	 * Once we have that, we double-check that that project_id is suitable
+	 * for the hardware we are working with.
+	 */
+	while (fwptr >= fw->data + (sizeof(struct rtl_epatch_header) + 3)) {
+		opcode = *--fwptr;
+		length = *--fwptr;
+		data = *--fwptr;
+
+		BT_DBG("check op=%x len=%x data=%x", opcode, length, data);
+
+		if (opcode == 0xff) /* EOF */
+			break;
+
+		if (length == 0) {
+			BT_ERR("%s: found instruction with length 0",
+			       hdev->name);
+			return -EINVAL;
+		}
+
+		if (opcode == 0 && length == 1) {
+			project_id = data;
+			break;
+		}
+
+		fwptr -= length;
+	}
+
+	if (project_id < 0) {
+		BT_ERR("%s: failed to find version instruction", hdev->name);
+		return -EINVAL;
+	}
+
+	/* Find project_id in table */
+	for (i = 0; i < ARRAY_SIZE(project_id_to_lmp_subver); i++) {
+		if (project_id == project_id_to_lmp_subver[i].id)
+			break;
+	}
+
+	if (i >= ARRAY_SIZE(project_id_to_lmp_subver)) {
+		BT_ERR("%s: unknown project id %d", hdev->name, project_id);
+		return -EINVAL;
+	}
+
+	if (lmp_subver != project_id_to_lmp_subver[i].lmp_subver) {
+		BT_ERR("%s: firmware is for %x but this is a %x", hdev->name,
+		       project_id_to_lmp_subver[i].lmp_subver, lmp_subver);
+		return -EINVAL;
+	}
+
+	epatch_info = (struct rtl_epatch_header *)fw->data;
+	if (memcmp(epatch_info->signature, RTL_EPATCH_SIGNATURE, 8) != 0) {
+		BT_ERR("%s: bad EPATCH signature", hdev->name);
+		return -EINVAL;
+	}
+
+	num_patches = le16_to_cpu(epatch_info->num_patches);
+	BT_DBG("fw_version=%x, num_patches=%d",
+	       le32_to_cpu(epatch_info->fw_version), num_patches);
+
+	/* After the rtl_epatch_header there is a funky patch metadata section.
+	 * Assuming 2 patches, the layout is:
+	 * ChipID1 ChipID2 PatchLength1 PatchLength2 PatchOffset1 PatchOffset2
+	 *
+	 * Find the right patch for this chip.
+	 */
+	min_size += 8 * num_patches;
+	if (fw->size < min_size)
+		return -EINVAL;
+
+	chip_id_base = fw->data + sizeof(struct rtl_epatch_header);
+	patch_length_base = chip_id_base + (sizeof(u16) * num_patches);
+	patch_offset_base = patch_length_base + (sizeof(u16) * num_patches);
+	for (i = 0; i < num_patches; i++) {
+		u16 chip_id = get_unaligned_le16(chip_id_base +
+						 (i * sizeof(u16)));
+		if (chip_id == rom_version + 1) {
+			patch_length = get_unaligned_le16(patch_length_base +
+							  (i * sizeof(u16)));
+			patch_offset = get_unaligned_le32(patch_offset_base +
+							  (i * sizeof(u32)));
+			break;
+		}
+	}
+
+	if (!patch_offset) {
+		BT_ERR("%s: didn't find patch for chip id %d",
+		       hdev->name, rom_version);
+		return -EINVAL;
+	}
+
+	BT_DBG("length=%x offset=%x index %d", patch_length, patch_offset, i);
+	min_size = patch_offset + patch_length;
+	if (fw->size < min_size)
+		return -EINVAL;
+
+	/* Copy the firmware into a new buffer and write the version at
+	 * the end.
+	 */
+	len = patch_length;
+	buf = kmemdup(fw->data + patch_offset, patch_length, GFP_KERNEL);
+	if (!buf)
+		return -ENOMEM;
+
+	memcpy(buf + patch_length - 4, &epatch_info->fw_version, 4);
+
+	*_buf = buf;
+	return len;
+}
+
+static int rtl_download_firmware(struct hci_dev *hdev,
+				 const unsigned char *data, int fw_len)
+{
+	struct rtl_download_cmd *dl_cmd;
+	int frag_num = fw_len / RTL_FRAG_LEN + 1;
+	int frag_len = RTL_FRAG_LEN;
+	int ret = 0;
+	int i;
+
+	dl_cmd = kmalloc(sizeof(struct rtl_download_cmd), GFP_KERNEL);
+	if (!dl_cmd)
+		return -ENOMEM;
+
+	for (i = 0; i < frag_num; i++) {
+		struct sk_buff *skb;
+
+		BT_DBG("download fw (%d/%d)", i, frag_num);
+
+		dl_cmd->index = i;
+		if (i == (frag_num - 1)) {
+			dl_cmd->index |= 0x80; /* data end */
+			frag_len = fw_len % RTL_FRAG_LEN;
+		}
+		memcpy(dl_cmd->data, data, frag_len);
+
+		/* Send download command */
+		skb = __hci_cmd_sync(hdev, 0xfc20, frag_len + 1, dl_cmd,
+				     HCI_INIT_TIMEOUT);
+		if (IS_ERR(skb)) {
+			BT_ERR("%s: download fw command failed (%ld)",
+			       hdev->name, PTR_ERR(skb));
+			ret = -PTR_ERR(skb);
+			goto out;
+		}
+
+		if (skb->len != sizeof(struct rtl_download_response)) {
+			BT_ERR("%s: download fw event length mismatch",
+			       hdev->name);
+			kfree_skb(skb);
+			ret = -EIO;
+			goto out;
+		}
+
+		kfree_skb(skb);
+		data += RTL_FRAG_LEN;
+	}
+
+out:
+	kfree(dl_cmd);
+	return ret;
+}
+
+static int rtl_load_config(struct hci_dev *hdev, const char *name, u8 **buff)
+{
+	const struct firmware *fw;
+	int ret;
+
+	bt_dev_info(hdev, "rtl: loading %s", name);
+	ret = request_firmware(&fw, name, &hdev->dev);
+	if (ret < 0)
+		return ret;
+	ret = fw->size;
+	*buff = kmemdup(fw->data, ret, GFP_KERNEL);
+	if (!*buff)
+		ret = -ENOMEM;
+
+	release_firmware(fw);
+
+	return ret;
+}
+
+static int btrtl_setup_rtl8723a(struct hci_dev *hdev)
+{
+	const struct firmware *fw;
+	int ret;
+
+	bt_dev_info(hdev, "rtl: loading rtl_bt/rtl8723a_fw.bin");
+	ret = request_firmware(&fw, "rtl_bt/rtl8723a_fw.bin", &hdev->dev);
+	if (ret < 0) {
+		BT_ERR("%s: Failed to load rtl_bt/rtl8723a_fw.bin", hdev->name);
+		return ret;
+	}
+
+	if (fw->size < 8) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	/* Check that the firmware doesn't have the epatch signature
+	 * (which is only for RTL8723B and newer).
+	 */
+	if (!memcmp(fw->data, RTL_EPATCH_SIGNATURE, 8)) {
+		BT_ERR("%s: unexpected EPATCH signature!", hdev->name);
+		ret = -EINVAL;
+		goto out;
+	}
+
+	ret = rtl_download_firmware(hdev, fw->data, fw->size);
+
+out:
+	release_firmware(fw);
+	return ret;
+}
+
+static int btrtl_setup_rtl8723b(struct hci_dev *hdev, u16 hci_rev,
+				u16 lmp_subver)
+{
+	unsigned char *fw_data = NULL;
+	const struct firmware *fw;
+	int ret;
+	int cfg_sz;
+	u8 *cfg_buff = NULL;
+	u8 *tbuff;
+	char *cfg_name = NULL;
+	char *fw_name = NULL;
+	int i;
+
+	for (i = 0; i < ARRAY_SIZE(ic_id_table); i++) {
+		if ((ic_id_table[i].match_flags & IC_MATCH_FL_LMPSUBV) &&
+		    (ic_id_table[i].lmp_subver != lmp_subver))
+			continue;
+		if ((ic_id_table[i].match_flags & IC_MATCH_FL_HCIREV) &&
+		    (ic_id_table[i].hci_rev != hci_rev))
+			continue;
+
+		break;
+	}
+
+	if (i >= ARRAY_SIZE(ic_id_table)) {
+		BT_ERR("%s: unknown IC info, lmp subver %04x, hci rev %04x",
+		       hdev->name, lmp_subver, hci_rev);
+		return -EINVAL;
+	}
+
+	cfg_name = ic_id_table[i].cfg_name;
+
+	if (cfg_name) {
+		cfg_sz = rtl_load_config(hdev, cfg_name, &cfg_buff);
+		if (cfg_sz < 0) {
+			cfg_sz = 0;
+			if (ic_id_table[i].config_needed)
+				BT_ERR("Necessary config file %s not found\n",
+				       cfg_name);
+		}
+	} else
+		cfg_sz = 0;
+
+	fw_name = ic_id_table[i].fw_name;
+	bt_dev_info(hdev, "rtl: loading %s", fw_name);
+	ret = request_firmware(&fw, fw_name, &hdev->dev);
+	if (ret < 0) {
+		BT_ERR("%s: Failed to load %s", hdev->name, fw_name);
+		goto err_req_fw;
+	}
+
+	ret = rtlbt_parse_firmware(hdev, lmp_subver, fw, &fw_data);
+	if (ret < 0)
+		goto out;
+
+	if (cfg_sz) {
+		tbuff = kzalloc(ret + cfg_sz, GFP_KERNEL);
+		if (!tbuff) {
+			ret = -ENOMEM;
+			goto out;
+		}
+
+		memcpy(tbuff, fw_data, ret);
+		kfree(fw_data);
+
+		memcpy(tbuff + ret, cfg_buff, cfg_sz);
+		ret += cfg_sz;
+
+		fw_data = tbuff;
+	}
+
+	bt_dev_info(hdev, "cfg_sz %d, total size %d", cfg_sz, ret);
+
+	ret = rtl_download_firmware(hdev, fw_data, ret);
+
+out:
+	release_firmware(fw);
+	kfree(fw_data);
+err_req_fw:
+	if (cfg_sz)
+		kfree(cfg_buff);
+	return ret;
+}
+
+static struct sk_buff *btrtl_read_local_version(struct hci_dev *hdev)
+{
+	struct sk_buff *skb;
+
+	skb = __hci_cmd_sync(hdev, HCI_OP_READ_LOCAL_VERSION, 0, NULL,
+			     HCI_INIT_TIMEOUT);
+	if (IS_ERR(skb)) {
+		BT_ERR("%s: HCI_OP_READ_LOCAL_VERSION failed (%ld)",
+		       hdev->name, PTR_ERR(skb));
+		return skb;
+	}
+
+	if (skb->len != sizeof(struct hci_rp_read_local_version)) {
+		BT_ERR("%s: HCI_OP_READ_LOCAL_VERSION event length mismatch",
+		       hdev->name);
+		kfree_skb(skb);
+		return ERR_PTR(-EIO);
+	}
+
+	return skb;
+}
+
+int btrtl_setup_realtek(struct hci_dev *hdev)
+{
+	struct sk_buff *skb;
+	struct hci_rp_read_local_version *resp;
+	u16 hci_rev, lmp_subver;
+
+	skb = btrtl_read_local_version(hdev);
+	if (IS_ERR(skb))
+		return -PTR_ERR(skb);
+
+	resp = (struct hci_rp_read_local_version *)skb->data;
+	bt_dev_info(hdev, "rtl: examining hci_ver=%02x hci_rev=%04x "
+		    "lmp_ver=%02x lmp_subver=%04x",
+		    resp->hci_ver, resp->hci_rev,
+		    resp->lmp_ver, resp->lmp_subver);
+
+	hci_rev = le16_to_cpu(resp->hci_rev);
+	lmp_subver = le16_to_cpu(resp->lmp_subver);
+	kfree_skb(skb);
+
+	/* Match a set of subver values that correspond to stock firmware,
+	 * which is not compatible with standard btusb.
+	 * If matched, upload an alternative firmware that does conform to
+	 * standard btusb. Once that firmware is uploaded, the subver changes
+	 * to a different value.
+	 */
+	switch (lmp_subver) {
+	case RTL_ROM_LMP_8723A:
+	case RTL_ROM_LMP_3499:
+		return btrtl_setup_rtl8723a(hdev);
+	case RTL_ROM_LMP_8723B:
+	case RTL_ROM_LMP_8821A:
+	case RTL_ROM_LMP_8761A:
+	case RTL_ROM_LMP_8822B:
+		return btrtl_setup_rtl8723b(hdev, hci_rev, lmp_subver);
+	default:
+		bt_dev_info(hdev, "rtl: assuming no firmware upload needed");
+		return 0;
+	}
+}
+EXPORT_SYMBOL_GPL(btrtl_setup_realtek);
+
+MODULE_AUTHOR("Daniel Drake <drake@endlessm.com>");
+MODULE_DESCRIPTION("Bluetooth support for Realtek devices ver " VERSION);
+MODULE_VERSION(VERSION);
+MODULE_LICENSE("GPL");
+
+namespace GirlTrainer
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startImage = new System.Windows.Forms.PictureBox();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1106, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.quitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
+            this.toolStripMenuItem1.Text = "Settings";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.wikiToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // wikiToolStripMenuItem
+            // 
+            this.wikiToolStripMenuItem.Name = "wikiToolStripMenuItem";
+            this.wikiToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.wikiToolStripMenuItem.Text = "Wiki";
+            // 
+            // startImage
+            // 
+            this.startImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.startImage.Location = new System.Drawing.Point(13, 37);
+
+            // 
+            // startText
+            // 
+            this.startText.Location = new System.Drawing.Point(123, 439);
+            this.startText.Name = "startText";
+            this.startText.ReadOnly = true;
+            this.startText.Size = new System.Drawing.Size(728, 130);
+            this.startText.TabIndex = 2;
+            this.startText.Text = "";
+            // 
+            // btn_Start
+            // 
+            this.btn_Start.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Start.Image = global::LoliTrainer.Properties.Resources.StartNewGame;
+            this.btn_Start.Location = new System.Drawing.Point(262, 575);
+            this.btn_Start.Name = "btn_Start";
+            this.btn_Start.Size = new System.Drawing.Size(213, 56);
+            this.btn_Start.TabIndex = 3;
+            this.btn_Start.UseVisualStyleBackColor = false;
+            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
+            // 
+            // btn_Load
+            // 
+            this.btn_Load.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Load.Image = global::LoliTrainer.Properties.Resources.LoadGame;
+            this.btn_Load.Location = new System.Drawing.Point(527, 575);
+            this.btn_Load.Name = "btn_Load";
+            this.btn_Load.Size = new System.Drawing.Size(183, 63);
+            this.btn_Load.TabIndex = 4;
+            this.btn_Load.UseVisualStyleBackColor = false;
+            this.btn_Load.Click += new System.EventHandler(this.btn_Load_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+  
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.startImage)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+
+        private System.Windows.Forms.Button btn_Load;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+    }
+}
+
