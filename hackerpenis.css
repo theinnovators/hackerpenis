@@ -8,3 +8,39 @@ body {
   color: lawngreen;
   font-family: hackerFont;
 }
+
+form {
+  width: 40%;
+  display: inline-block;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  position: relative;
+  color: greenyellow;
+  top: 10px;
+  height: 30px;
+  width: 30px;
+  margin-right: 7px;
+  border: 1px dashed;
+}
+
+input:checked::before {
+  position: absolute;
+  font: 13px/1 'Open Sans', sans-serif;
+  left: 35%;
+  top: 28%;
+  content: 'X';
+}
+
+input:focus {
+  /*outline-color: greenyellow;*/
+  outline: none;
+}
+
+fieldset {
+  border-color: greenyellow;
+}
