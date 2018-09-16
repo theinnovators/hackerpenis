@@ -7,26 +7,27 @@ const SHAFT_MEDIUM = 10;
 const SHAFT_LARGE = 15;
 const SHAFT_XLARGE = 20;
 
-var nutWidth = BALLS_SMALL;
-var shaftHeight = SHAFT_SMALL;
+var nutWidth = BALLS_MEDIUM;
+var shaftHeight = SHAFT_MEDIUM;
 var stringIndex = 0;
-var dataString = "";
+var dataString = '';
 var cursorIndex = 0;
 var nutEndReached = false;
 var lineEndReached = false;
 var linesPrinted = 0;
 var state = 'BALLS'; // BALLS, SHAFT
 var inShaft = false;
-var pendingWidthChange = '';
-var pendingHeightChange = '';
+var pendingWidth = '';
+var pendingHeight = '';
 
+// heavily copied from SO ;)
 function reqListener () {
   dataString = this.responseText;
 }
 
 var inputFile = new XMLHttpRequest();
-inputFile.addEventListener("load", reqListener);
-inputFile.open("GET", "HPinput.txt");
+inputFile.addEventListener('load', reqListener);
+inputFile.open('GET', 'HPinput.txt');
 inputFile.send();
 
 $(document).ready(function() {
@@ -34,14 +35,14 @@ $(document).ready(function() {
     if (this.name == 'width') {
       if (stringIndex == 0) changeWidth(this.id);
       else {
-        pendingWidthChange = this.id;
+        pendingWidth = this.id;
         return;
       }
     }
     else {
       if (stringIndex == 0) changeHeight(this.id);
       else {
-        pendingHeightChange = this.id;
+        pendingHeight = this.id;
         return;
       }
     }
@@ -68,7 +69,7 @@ function changeWidth(newWidth) {
     default:
       break;
   }
-  pendingWidthChange = '';
+  pendingWidth = '';
 }
 
 function changeHeight(newHeight) {
@@ -88,12 +89,12 @@ function changeHeight(newHeight) {
     default:
       break;
   }
-  pendingHeightChange = '';
+  pendingHeight = '';
 }
 
-$(document).on('keypress touchstart', (function(event) {
-  if (event.target.type == 'radio') return;
-  for (var outerIndex = 0; outerIndex < 3; ++outerIndex) {
+$(document).on('keyup touchend', (function(event) {
+  if (event.target.tagName == 'DIV') return;
+  for (var numChars = 0; numChars < 3; ++numChars) {
     if (state == 'BALLS') {
       for (var i = 0; i < nutWidth / 3; ++i) {
         // space between nuts
@@ -128,7 +129,7 @@ $(document).on('keypress touchstart', (function(event) {
         // end of nuts 
         if (linesPrinted == Math.ceil(nutWidth / 2)) {
           console.log('end of nuts');
-          state = "SHAFT";
+          state = 'SHAFT';
           for (var i = 0; i < ((nutWidth * 2) / 3) - 1; ++i) {
             $('#mainWindow').append("&nbsp;");
             cursorIndex = ((nutWidth * 2) / 3) - 1;
@@ -137,7 +138,7 @@ $(document).on('keypress touchstart', (function(event) {
         }
       }
     }
-    else if (state == "SHAFT") {
+    else if (state == 'SHAFT') {
       for (var i = 0; i < nutWidth / 3; ++i) {
         $('#mainWindow').append(dataString[stringIndex]);
         stringIndex++;
@@ -157,11 +158,11 @@ $(document).on('keypress touchstart', (function(event) {
           cursorIndex = 0;
           linesPrinted = 0;
           $('#mainWindow').append("<br/><br/>");
-          if (pendingWidthChange != '') {
-            changeWidth(pendingWidthChange);
+          if (pendingWidth != '') {
+            changeWidth(pendingWidth);
           }
-          if (pendingHeightChange != '') {
-            changeHeight(pendingHeightChange);
+          if (pendingHeight != '') {
+            changeHeight(pendingHeight);
           }
         }
       }
