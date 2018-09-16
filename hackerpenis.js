@@ -88,7 +88,8 @@ function changeHeight(newHeight) {
   pendingHeightChange = '';
 }
 
-$(document).on('keypress touchstart', (function() {
+$(document).on('keypress touchstart', (function(event) {
+  if (event.target.type == 'radio') return;
   for (var outerIndex = 0; outerIndex < 3; ++outerIndex) {
     if (state == 'BALLS') {
       for (var i = 0; i < nutWidth / 3; ++i) {
