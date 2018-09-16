@@ -47,7 +47,7 @@ fieldset {
 
 .cursor {
   font-size: 100%;
-  transform: scaleX(0.5);
+  /*transform: scaleX(0.5);*/
   font-weight: lighter;
   animation-name: blink;
   animation-duration: 900ms;
