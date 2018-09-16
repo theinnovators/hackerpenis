@@ -46,6 +46,9 @@ $(document).ready(function() {
       }
     }
   });
+  $('.no-zoom').bind('touchend', function(e) {
+    e.preventDefault();
+  });
 });
 
 function changeWidth(newWidth) {
