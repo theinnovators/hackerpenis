@@ -94,9 +94,11 @@ function changeHeight(newHeight) {
 
 $(document).on('keyup touchend', (function(event) {
   // only add text if touch is on main area
-  if (event.type == 'touchend' && 
+  if ($(event.target).parents('#settings').length) return;
+  
+  /*if (event.type == 'touchend' && 
       !(event.target.tagName == 'HTML' || 
-        event.target.tagName == 'SPAN')) return;
+        event.target.tagName == 'SPAN')) return;*/
   for (var numChars = 0; numChars < 3; ++numChars) {
     if (state == 'BALLS') {
       for (var i = 0; i < nutWidth / 3; ++i) {
