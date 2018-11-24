@@ -7,11 +7,42 @@ body {
   background-color: black;
   color: lawngreen;
   font-family: hackerFont;
+  overflow-y: hidden;
+}
+
+#header{
+  padding-bottom: 10px;
+}
+
+#settings {
+  padding-bottom: 10px;
+}
+
+#mainWindowContainer {
+  overflow-y: scroll;
+}
+
+#toBegin {
+  margin-top: 0px;
 }
 
 form {
   width: 40%;
   display: inline-block;
+}
+
+#mainWindowContainer {
+  overflow: -moz-scrollbars-none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+::-moz-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 input {
@@ -37,7 +68,6 @@ input:checked::before {
 }
 
 input:focus {
-  /*outline-color: greenyellow;*/
   outline: none;
 }
 
@@ -47,7 +77,6 @@ fieldset {
 
 .cursor {
   font-size: 100%;
-  /*transform: scaleX(0.5);*/
   font-weight: lighter;
   animation-name: blink;
   animation-duration: 900ms;
@@ -55,8 +84,6 @@ fieldset {
 }
 
 @keyframes blink {
-  /*from { opacity: 1; }
-  to { opacity: 0; }*/
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
   100% { opacity: 1.0; }

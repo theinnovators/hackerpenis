@@ -31,6 +31,12 @@ inputFile.open('GET', 'HPinput.txt');
 inputFile.send();
 
 $(document).ready(function() {
+  var bodyHeight = $(document).outerHeight();
+  var headerHeight = $('#header').outerHeight();
+  var settingsHeight = $('#settings').outerHeight();
+  var bodyMargin = parseInt($(document.body).css('margin-top'));
+  $('#mainWindowContainer').innerHeight(bodyHeight - settingsHeight - 
+                                        headerHeight - bodyMargin);
   $('input').change(function() {
     if (this.name == 'width') {
       if (stringIndex == 0) changeWidth(this.id);
@@ -172,7 +178,11 @@ $(document).on('keyup touchend', (function(event) {
         }
       }
     }
-    console.log('index: ', cursorIndex);
-    window.scrollTo(0, document.body.scrollHeight);
+    // keep scroll focus at bottom of page
+    var windowHeight = $('#mainWindowContainer')[0].scrollHeight;
+    $('#mainWindowContainer').scrollTop(windowHeight);
+    
+    // old method of keeping scroll focus, eventually hides settings
+    //window.scrollTo(0, document.body.scrollHeight);
   }
 }));
