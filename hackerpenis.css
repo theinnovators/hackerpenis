@@ -16,6 +16,12 @@
 #mobileAd {
   display: none;
 }
+#tinyAd {
+  float: left;
+  display: inline-block;
+  transform-origin: top left;
+  transform: scale(0.2);
+}
 @media screen and (max-device-width:780px) {
   #longAd {
     display: none;
