@@ -63,12 +63,12 @@ form {
   overflow-y: scroll;
 }
 
-#mainWindow {
+/* #mainWindow {
   float: left;
   transform-origin: top left;
   transform: scale(0.1);
   white-space: nowrap;
-}
+} */
 
 ::-webkit-scrollbar {
   width: 0px;
