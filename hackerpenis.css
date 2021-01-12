@@ -67,6 +67,7 @@ form {
   float: left;
   transform-origin: top left;
   transform: scale(0.2);
+  white-space: nowrap;
 }
 
 ::-webkit-scrollbar {
