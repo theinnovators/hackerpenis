@@ -106,7 +106,7 @@ function addChar() {
 
 function addSpace() {
   // $('#mainWindow').append("&nbsp;");
-  
+  $('.tinyAd').first().clone().css('display', 'none').appendTo('#tinyAdContainer')
 }
 
 $(document).on('keyup touchend', (function(event) {
