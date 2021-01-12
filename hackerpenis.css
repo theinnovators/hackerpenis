@@ -9,18 +9,18 @@
   background-color: blue;
 }
 
-#longAdDiv {
+#longAd {
   /* background-color: aqua; */
   float: right;
 }
-#mobileAdDiv {
+#mobileAd {
   display: none;
 }
 @media screen and (max-device-width:780px) {
-  #longAdDiv {
+  #longAd {
     display: none;
   }
-  #mobileAdDiv {
+  #mobileAd {
     display: block;
   }
 }
