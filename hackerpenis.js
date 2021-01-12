@@ -189,8 +189,8 @@ $(document).on('keyup touchend', (function(event) {
       }
     }
     // keep scroll focus at bottom of page
-    var windowHeight = $('#mainWindowContainer')[0].scrollHeight;
-    $('#mainWindowContainer').scrollTop(windowHeight);
+    // var windowHeight = $('#mainWindowContainer')[0].scrollHeight;
+    // $('#mainWindowContainer').scrollTop(windowHeight);
     
     // old method of keeping scroll focus, eventually hides settings
     //window.scrollTo(0, document.body.scrollHeight);
