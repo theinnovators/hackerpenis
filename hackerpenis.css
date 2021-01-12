@@ -20,7 +20,7 @@
   float: left;
   
   transform-origin: top left;
-  transform: scale(0.2);
+  transform: scale(0.1);
 }
 .tinyAd {
   display: inline-block;
