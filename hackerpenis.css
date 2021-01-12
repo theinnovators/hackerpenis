@@ -10,7 +10,8 @@
 }
 
 #adDiv {
-  background-color: aqua;
+  /* background-color: aqua; */
+  float: right;
 }
 
 body {
