@@ -18,9 +18,12 @@
 }
 #tinyAdContainer {
   float: left;
-  display: inline-block;
+  
   transform-origin: top left;
   transform: scale(0.2);
+}
+.tinyAd {
+  display: inline-block;
 }
 @media screen and (max-device-width:780px) {
   #longAd {
