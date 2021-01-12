@@ -98,6 +98,16 @@ function changeHeight(newHeight) {
   pendingHeight = '';
 }
 
+function addChar() {
+  $('#mainWindow').append(dataString[stringIndex]);
+  stringIndex++;
+  // $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
+}
+
+function addSpace() {
+  $('#mainWindow').append("&nbsp;");
+}
+
 $(document).on('keyup touchend', (function(event) {
   // only add text if touch is on main area
   if ($(event.target).parents('#settings').length) return;
@@ -110,13 +120,11 @@ $(document).on('keyup touchend', (function(event) {
       for (var i = 0; i < nutWidth / 3; ++i) {
         // space between nuts
         if (nutEndReached) {
-          $('#mainWindow').append("&nbsp;");
+          addSpace();
         }
         // main meat of the nuts
         else {
-          $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
-          // $('#mainWindow').append(dataString[stringIndex]);
-          // stringIndex++;
+          addChar();
         }
         cursorIndex++;
 
@@ -143,7 +151,7 @@ $(document).on('keyup touchend', (function(event) {
           console.log('end of nuts');
           state = 'SHAFT';
           for (var i = 0; i < ((nutWidth * 2) / 3) - 1; ++i) {
-            $('#mainWindow').append("&nbsp;");
+            addSpace();
             cursorIndex = ((nutWidth * 2) / 3) - 1;
           }
           linesPrinted = 0;
@@ -152,8 +160,7 @@ $(document).on('keyup touchend', (function(event) {
     }
     else if (state == 'SHAFT') {
       for (var i = 0; i < nutWidth / 3; ++i) {
-        // $('#mainWindow').append(dataString[stringIndex]);
-        $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
+        addChar();
         stringIndex++;
         cursorIndex++;
         if (cursorIndex == (((nutWidth * 2) / 3) + nutWidth + 1)) {
@@ -161,7 +168,7 @@ $(document).on('keyup touchend', (function(event) {
           $('#mainWindow').append("<br/>");
           linesPrinted++;
           for (var i = 0; i < ((nutWidth * 2) / 3) - 1; ++i) {
-            $('#mainWindow').append("&nbsp;");
+            addSpace();
             cursorIndex = ((nutWidth * 2) / 3) - 1;
           }
         }
