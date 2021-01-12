@@ -16,7 +16,7 @@
 #mobileAd {
   display: none;
 }
-#tinyAd {
+.tinyAd {
   float: left;
   display: inline-block;
   transform-origin: top left;
