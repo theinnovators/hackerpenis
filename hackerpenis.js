@@ -114,8 +114,9 @@ $(document).on('keyup touchend', (function(event) {
         }
         // main meat of the nuts
         else {
-          $('#mainWindow').append(dataString[stringIndex]);
-          stringIndex++;
+          $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
+          // $('#mainWindow').append(dataString[stringIndex]);
+          // stringIndex++;
         }
         cursorIndex++;
 

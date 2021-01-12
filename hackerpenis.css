@@ -18,9 +18,8 @@
 }
 #tinyAdContainer {
   float: left;
-  
   transform-origin: top left;
-  transform: scale(0.1);
+  transform: scale(0.2);
 }
 .tinyAd {
   display: inline-block;
@@ -50,10 +49,6 @@ body {
   padding-bottom: 10px;
 }
 
-#mainWindowContainer {
-  overflow-y: scroll;
-}
-
 #toBegin {
   margin-top: 0px;
 }
@@ -65,6 +60,13 @@ form {
 
 #mainWindowContainer {
   overflow: -moz-scrollbars-none;
+  overflow-y: scroll;
+}
+
+#mainWindow {
+  float: left;
+  transform-origin: top left;
+  transform: scale(0.2);
 }
 
 ::-webkit-scrollbar {
@@ -119,5 +121,4 @@ fieldset {
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
   100% { opacity: 1.0; }
-}
 }
