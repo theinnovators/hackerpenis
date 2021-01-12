@@ -9,13 +9,19 @@
   background-color: blue;
 }
 
-#adDiv {
+#longAdDiv {
   /* background-color: aqua; */
   float: right;
 }
+#mobileAdDiv {
+  display: none;
+}
 @media screen and (max-device-width:780px) {
-  #adDiv {
+  #longAdDiv {
     display: none;
+  }
+  #mobileAdDiv {
+    display: block;
   }
 }
 
