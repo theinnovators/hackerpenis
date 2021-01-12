@@ -101,12 +101,12 @@ function changeHeight(newHeight) {
 function addChar() {
   // $('#mainWindow').append(dataString[stringIndex]);
   // stringIndex++;
-  $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
+  $('.tinyAd').first().clone().appendTo('#mainWindow')
 }
 
 function addSpace() {
   // $('#mainWindow').append("&nbsp;");
-  $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
+  $('.tinyAd').first().clone().appendTo('#mainWindow')
 }
 
 $(document).on('keyup touchend', (function(event) {
