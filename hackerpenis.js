@@ -99,13 +99,14 @@ function changeHeight(newHeight) {
 }
 
 function addChar() {
-  $('#mainWindow').append(dataString[stringIndex]);
-  stringIndex++;
-  // $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
+  // $('#mainWindow').append(dataString[stringIndex]);
+  // stringIndex++;
+  $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
 }
 
 function addSpace() {
-  $('#mainWindow').append("&nbsp;");
+  // $('#mainWindow').append("&nbsp;");
+  
 }
 
 $(document).on('keyup touchend', (function(event) {
