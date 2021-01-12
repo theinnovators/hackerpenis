@@ -66,7 +66,7 @@ form {
 #mainWindow {
   float: left;
   transform-origin: top left;
-  transform: scale(0.2);
+  transform: scale(0.1);
   white-space: nowrap;
 }
 
