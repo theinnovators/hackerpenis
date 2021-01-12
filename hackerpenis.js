@@ -99,14 +99,14 @@ function changeHeight(newHeight) {
 }
 
 function addChar() {
-  // $('#mainWindow').append(dataString[stringIndex]);
-  // stringIndex++;
-  $('.tinyAd').first().clone().appendTo('#mainWindow')
+  $('#mainWindow').append(dataString[stringIndex]);
+  stringIndex++;
+  // $('.tinyAd').first().clone().appendTo('#mainWindow')
 }
 
 function addSpace() {
-  // $('#mainWindow').append("&nbsp;");
-  $('.tinyAd').first().clone().css('opacity', '0').appendTo('#mainWindow')
+  $('#mainWindow').append("&nbsp;");
+  // $('.tinyAd').first().clone().css('opacity', '0').appendTo('#mainWindow')
 }
 
 $(document).on('keyup touchend', (function(event) {
@@ -189,8 +189,8 @@ $(document).on('keyup touchend', (function(event) {
       }
     }
     // keep scroll focus at bottom of page
-    // var windowHeight = $('#mainWindowContainer')[0].scrollHeight;
-    // $('#mainWindowContainer').scrollTop(windowHeight);
+    var windowHeight = $('#mainWindowContainer')[0].scrollHeight;
+    $('#mainWindowContainer').scrollTop(windowHeight);
     
     // old method of keeping scroll focus, eventually hides settings
     //window.scrollTo(0, document.body.scrollHeight);
