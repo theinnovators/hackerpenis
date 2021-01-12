@@ -152,7 +152,8 @@ $(document).on('keyup touchend', (function(event) {
     }
     else if (state == 'SHAFT') {
       for (var i = 0; i < nutWidth / 3; ++i) {
-        $('#mainWindow').append(dataString[stringIndex]);
+        // $('#mainWindow').append(dataString[stringIndex]);
+        $('.tinyAd').first().clone().appendTo('#tinyAdContainer')
         stringIndex++;
         cursorIndex++;
         if (cursorIndex == (((nutWidth * 2) / 3) + nutWidth + 1)) {
