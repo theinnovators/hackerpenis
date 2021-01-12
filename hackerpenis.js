@@ -116,7 +116,7 @@ $(document).on('keyup touchend', (function(event) {
   /*if (event.type == 'touchend' && 
       !(event.target.tagName == 'HTML' || 
         event.target.tagName == 'SPAN')) return;*/
-  for (var numChars = 0; numChars < 3; ++numChars) {
+  for (var numChars = 0; numChars < 1; ++numChars) {
     if (state == 'BALLS') {
       for (var i = 0; i < nutWidth / 3; ++i) {
         // space between nuts
